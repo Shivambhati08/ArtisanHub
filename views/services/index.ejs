@@ -1,0 +1,163 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+#filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;      /* Keep everything in one line */
+  overflow-x: auto;       /* Horizontal scrolling */
+  white-space: nowrap;
+  gap: 1rem;
+  padding-bottom: 8px;
+  scrollbar-width: none;  /* Firefox */
+}
+.tax-info{
+    display: none;
+}
+
+#filters::-webkit-scrollbar {
+  display: none;          /* Chrome, Safari */
+}
+
+.filter {
+  flex: 0 0 auto;         /* Prevent shrinking */
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+
+.filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.tax-toggle {
+  flex: 0 0 auto;         /* Prevent shrinking */
+  border: 1px solid black;
+  border-radius: 1rem;
+  height: 3rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+.service-link {
+  text-decoration: none;
+  color: #222222;
+}
+
+.service-link:hover {
+  color: #222222;
+}
+
+</style>
+<body>
+  <%= success %>
+    <!-- <h3>All Services</h3> -->
+    <div id="filters">
+
+<a href="/services/category/Art" class="filter service-link">
+    <div><i class="fa-solid fa-palette"></i></div>
+    <p>Art</p>
+</a>
+
+<a href="/services/category/Food" class="filter service-link">
+    <div><i class="fa-solid fa-utensils"></i></div>
+    <p>Food</p>
+</a>
+
+<a href="/services/category/Pottery" class="filter service-link">
+    <div><i class="fa-solid fa-mug-hot"></i></div>
+    <p>Pottery</p>
+</a>
+
+<a href="/services/category/Handicrafts" class="filter service-link">
+    <div><i class="fa-solid fa-scissors"></i></div>
+    <p>Handicrafts</p>
+</a>
+
+<a href="/services/category/Jewellery" class="filter service-link">
+    <div><i class="fa-regular fa-gem"></i></div>
+    <p>Jewellery</p>
+</a>
+
+<a href="/services/category/Home Decor" class="filter service-link">
+    <div><i class="fa-solid fa-couch"></i></div>
+    <p>Home Decor</p>
+</a>
+
+<a href="/services/category/Kitchenware" class="filter service-link">
+    <div><i class="fa-solid fa-kitchen-set"></i></div>
+    <p>Kitchenware</p>
+</a>
+
+<a href="/services/category/Gifts" class="filter service-link">
+    <div><i class="fa-solid fa-gift"></i></div>
+    <p>Gifts</p>
+</a>
+
+<a href="/services/category/Others" class="filter service-link">
+    <div><i class="fa-solid fa-box-open"></i></div>
+    <p>Others</p>
+</a>
+
+<div class="tax-toggle">
+
+<div class="form-check form-switch">
+
+<input
+class="form-check-input"
+type="checkbox"
+id="switchCheckDefault">
+
+<label class="form-check-label">
+
+Display total after taxes
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <% for(let service of allServices) { %>
+        <a href="/services/<%= service._id %>" class="service-link"> 
+    <div class="card col service-card">
+  <img src="<%= service.image.url %>" class="card-img-top" alt="service_image" style="height: 20rem;">
+  <div class="card-img-overlay"></div>
+  <div class="card-body">
+
+<p class="card-text mb-1">
+    <b><%= service.title %></b>
+</p>
+
+<p class="text-danger mb-0">
+    &#8377;
+    <%= service.price.toLocaleString("en-IN") %>
+
+    <span class="tax-info">
+        +18% GST*
+    </span>
+</p>
+
+</div>
+</div>
+</a>
+  <% } %>
+  </div>
+</body>
+<script>
+let btn = document.querySelector("#switchCheckDefault");
+btn.addEventListener("click", ()=>{
+  let infos = document.querySelectorAll(".tax-info");
+  for(info of infos){
+    if(info.style.display != "inline"){
+        info.style.display = "inline";
+    }else{
+      info.style.display = "none";
+    }
+  }
+})
+</script>

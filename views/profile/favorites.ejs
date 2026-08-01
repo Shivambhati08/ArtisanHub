@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="mt-4 mb-4">
+
+❤️ Favorite Services
+
+</h2>
+
+<div class="row">
+
+<% if(services.length===0){ %>
+
+<h4>No Favorites Yet</h4>
+
+<% }else{ %>
+
+<% services.forEach(service=>{ %>
+
+<div class="col-md-4 mb-4">
+
+<a href="/services/<%= service._id %>" class="listing-link">
+
+<div class="card listing-card">
+
+<img
+src="<%= service.image.url %>"
+class="card-img-top"
+style="height:250px;object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h5><%= service.title %></h5>
+
+<p>
+
+₹ <%= service.price.toLocaleString("en-IN") %>
+
+</p>
+
+<p>
+
+<%= service.location %>
+
+</p>
+
+<form
+action="/profile/favorites/<%= service._id %>?_method=DELETE"
+method="POST"
+>
+
+<button class="btn btn-outline-danger w-100">
+
+Remove
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+<% }) %>
+
+<% } %>
+
+</div>

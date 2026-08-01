@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+
+<h2 class="mb-4">Edit Profile</h2>
+
+<form
+action="/profile?_method=PUT"
+method="POST"
+enctype="multipart/form-data"
+>
+
+<!-- Current Profile Image -->
+
+<div class="mb-3 text-center">
+
+<img
+src="<%= user.profileImage?.url || '/images/default-user.png' %>"
+class="rounded-circle shadow"
+style="width:150px;height:150px;object-fit:cover;"
+>
+
+</div>
+
+<!-- Upload New Image -->
+
+<div class="mb-3">
+
+<label class="form-label">Profile Image</label>
+
+<input
+type="file"
+name="profileImage"
+class="form-control"
+accept="image/*"
+>
+
+</div>
+
+<!-- Phone -->
+
+<div class="mb-3">
+
+<label class="form-label">Phone</label>
+
+<input
+type="text"
+name="phone"
+class="form-control"
+value="<%= user.phone || '' %>"
+>
+
+</div>
+
+<!-- Bio -->
+
+<div class="mb-3">
+
+<label class="form-label">Bio</label>
+
+<textarea
+name="bio"
+rows="5"
+class="form-control"><%= user.bio || '' %></textarea>
+
+</div>
+
+<button class="btn btn-danger">
+Save Changes
+</button>
+
+</form>
+
+</div>

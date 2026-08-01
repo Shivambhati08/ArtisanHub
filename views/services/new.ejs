@@ -1,0 +1,101 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h3>Add new Service</h3>
+      <form
+        action="/services"
+        method="post"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            name="service[title]"
+            placeholder="add a catcy title"
+            class="form-control"
+            required
+          />
+          <div class="valid-feedback">Title looks good!</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            name="service[description]"
+            placeholder="enter description"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+
+          <select class="form-select" name="service[category]" required>
+             <option value="Art">Art</option>
+        <option value="Food">Food</option>
+        <option value="Pottery">Pottery</option>
+        <option value="Handicrafts">Handicrafts</option>
+        <option value="Jewellery">Jewellery</option>
+        <option value="Home Decor">Home Decor</option>
+        <option value="Kitchenware">Kitchenware</option>
+        <option value="Gifts">Gifts</option>
+        <option value="Others">Others</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Service Image</label>
+          <input
+            type="file"
+            name="service[image]"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input
+                type="text"
+                name="service[price]"
+                placeholder="1200"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">invalid price</div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="mb-3">
+              <label for="country" class="form-label">Country</label>
+              <input
+                type="text"
+                name="service[country]"
+                placeholder="India"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="service[location]"
+            placeholder="Greater Noida"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <button class="btn btn-dark add-btn">Submit</button>
+        <br />
+        <br />
+      </form>
+    </div>
+  </div>
+</body>

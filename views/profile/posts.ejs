@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="mt-4 mb-4">
+My Services
+</h2>
+
+<div class="row">
+
+<% services.forEach(service=>{ %>
+
+<div class="col-md-4 mb-4">
+
+<a style="text-decoration: none;" href="/services/<%= service._id %>" class="listing-link">
+
+<div class="card listing-card">
+
+<img
+src="<%= service.image.url %>"
+class="card-img-top"
+style="height:250px;object-fit:cover;"
+>
+
+<div class="card-body">
+
+<h5><%= service.title %></h5>
+
+<p>
+
+₹ <%= service.price.toLocaleString("en-IN") %>
+
+</p>
+
+<p>
+
+<%= service.location %>
+
+</p>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+<% }) %>
+
+</div>

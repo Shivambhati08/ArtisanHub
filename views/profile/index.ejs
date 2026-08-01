@@ -1,0 +1,82 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+
+    <!-- Profile Card -->
+    <div class="card shadow p-4">
+
+        <div class="text-center">
+
+            <img
+                src="<%= user.profileImage?.url || '/images/default-user.png' %>"
+                class="rounded-circle mb-3"
+                width="150"
+                height="150"
+                style="object-fit:cover;"
+            >
+
+            <h2><%= user.username %></h2>
+
+            <p><%= user.email %></p>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                <%= user.phone || "Not Added" %>
+            </p>
+
+            <p>
+                <%= user.bio || "No Bio Added Yet" %>
+            </p>
+
+            <a href="/profile/edit" class="btn btn-danger">
+                Edit Profile
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="row text-center mt-4">
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h2><%= totalServices %></h2>
+                <p>My Services</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h2><%= favoriteCount %></h2>
+                <p>Favorites</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h2><%= reviewCount %></h2>
+                <p>Reviews</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-5 text-center">
+
+        <a href="/profile/posts" class="btn btn-dark me-2">
+            <i class="fa-solid fa-briefcase"></i> My Services
+        </a>
+
+        <a href="/profile/favorites" class="btn btn-outline-danger me-2">
+            <i class="fa-solid fa-heart"></i> Favorites
+        </a>
+
+        <a href="/profile/edit" class="btn btn-outline-primary">
+            <i class="fa-solid fa-user-pen"></i> Edit Profile
+        </a>
+
+    </div>
+
+</div>

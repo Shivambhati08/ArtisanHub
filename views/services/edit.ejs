@@ -1,0 +1,137 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+      <h3>Edit this service</h3>
+      <form action="/services/<%=service._id%>?_method=PUT" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            name="service[title]"
+            value="<%= service.title %>"
+            class="form-control"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="service[description]" class="form-control">
+<%= service.description %></textarea
+          >
+        </div>
+        <div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+
+  <select class="form-select" id="category" name="service[category]">
+   <option value="Art"
+<%= service.category==="Art" ? "selected" : "" %>>
+
+Art
+
+</option>
+
+<option value="Food"
+<%= service.category==="Food" ? "selected" : "" %>>
+
+Food
+
+</option>
+
+<option value="Pottery"
+<%= service.category==="Pottery" ? "selected" : "" %>>
+
+Pottery
+
+</option>
+
+<option value="Handicrafts"
+<%= service.category==="Handicrafts" ? "selected" : "" %>>
+
+Handicrafts
+
+</option>
+
+<option value="Jewellery"
+<%= service.category==="Jewellery" ? "selected" : "" %>>
+
+Jewellery
+
+</option>
+
+<option value="Home Decor"
+<%= service.category==="Home Decor" ? "selected" : "" %>>
+
+Home Decor
+
+</option>
+
+<option value="Kitchenware"
+<%= service.category==="Kitchenware" ? "selected" : "" %>>
+
+Kitchenware
+
+</option>
+
+<option value="Gifts"
+<%= service.category==="Gifts" ? "selected" : "" %>>
+
+Gifts
+
+</option>
+
+<option value="Others"
+<%= service.category==="Others" ? "selected" : "" %>>
+
+Others
+
+</option>
+  </select>
+</div>
+
+        <div class="mp-3">
+          Original Service Image <br>
+          <img src="<%= OriginalImageurl %>">
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload New Image</label>
+          <input
+            type="file"
+            name="service[image]"
+            class="form-control"
+          />
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price</label>
+              <input
+                type="number"
+                name="service[price]"
+                value="<%= service.price %>"
+                class="form-control"
+              />
+          </div>
+            <div class="mb-3 col-md-8">
+              <label for="country" class="form=label">Country</label>
+              <input
+                type="text"
+                name="service[country]"
+                value="<%= service.country %>"
+                class="form-control"
+              />
+            </div>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form=label">Location</label>
+          <input
+            type="text"
+            name="service[location]"
+            value="<%= service.location %>"
+            class="form-control"
+          />
+        </div>
+
+        <button class="btn btn-dark edit-btn mt-3">Submit</button> <br> <br>    
+      </form>
+    </div>
+  </div>
+</body>

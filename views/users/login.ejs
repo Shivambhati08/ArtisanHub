@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+  <h1 class="col-6 offset-3">Login on ArtisanHub</h1>
+
+  <div class="col-6 offset-3">
+    <form action="/login" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <button class="btn btn-success">Login</button>
+      <div class="text-center my-4">
+        <hr />
+
+        <p>OR</p>
+
+        <a href="/auth/google" class="btn btn-light border shadow-sm w-100">
+          <img
+            src="https://developers.google.com/identity/images/g-logo.png"
+            width="20"
+            class="me-2"
+          />
+
+          Continue with Google
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- </div> -->
