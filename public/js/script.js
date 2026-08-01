@@ -37,9 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    document.querySelectorAll(".navbar-nav .nav-link").forEach(link => {
-        link.addEventListener("click", () => {
-            bsCollapse.hide();
-        });
+   document.querySelectorAll(".navbar-nav .nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+
+        // Don't close when clicking the profile dropdown
+        if (link.classList.contains("dropdown-toggle")) {
+            return;
+        }
+
+        bsCollapse.hide();
     });
+});
 });
