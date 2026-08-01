@@ -51,37 +51,33 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
-  crypto:{  
-    secret: process.env.SECRET,
-  },
   touchAfter: 24*3600,
 });
-
 store.on("error", (err)=>{
   console.log("error in mongo session store", err);
 })
 
-const sessionOptions = {
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true, 
-  },
-};
 // const sessionOptions = {
-//   store, // ✅ Use MongoStore
 //   secret: process.env.SECRET,
 //   resave: false,
-//   saveUninitialized: false,
+//   saveUninitialized: true,
 //   cookie: {
 //     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
 //     maxAge: 7 * 24 * 60 * 60 * 1000,
-//     httpOnly: true,
+//     httpOnly: true, 
 //   },
 // };
+const sessionOptions = {
+  store, // ✅ Use MongoStore
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
 
 require("./config/passportGoogle")(passport);
 app.use(session(sessionOptions));
@@ -94,10 +90,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.get("/", (req, res) => {
+  console.log("Root route hit");
   res.redirect("/services");
 });
 
-app.use((req, res, next)=>{
+app.use((req, res, next)=>{ 
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
@@ -125,12 +122,24 @@ app.all("*splat", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
 });
 
+// app.use((err, req, res, next) => {
+//   let { statusCode = 500, message = "Something went wrong" } = err;
+//   res.status(statusCode).render("error.ejs", { message });
+// });
 app.use((err, req, res, next) => {
+  console.log("========== ERROR ==========");
+  console.error(err);
+  console.log("Status:", err.statusCode);
+  console.log("Message:", err.message);
+  console.log("Stack:", err.stack);
+
   let { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("error.ejs", { message });
 });
 
 
-app.listen(8080, () => {
-  console.log("server is listening to port 8080");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });

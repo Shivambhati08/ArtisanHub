@@ -113,11 +113,11 @@
 </a>
 
 
-        <% if(!currUser){ %>
+        <% if(!locals.currUser){ %>
         <a class="nav-link" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
-       <% if(currUser){ %>
+       <% if(locals.currUser){ %>
 
 <div class="dropdown">
 
@@ -128,10 +128,10 @@ role="button"
 data-bs-toggle="dropdown">
 
 <img
-src="<%= currUser.profileImage?.url || '/images/default-user.png' %>"
+src="<%= locals.currUser.profileImage.url %>"
 class="profile-nav-img me-2">
 
-<span><%= currUser.username %></span>
+<span><%= locals.currUser.username %></span>
 
 </a>
 

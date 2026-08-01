@@ -10,15 +10,16 @@ module.exports.serviceSchema = Joi.object({
     image: Joi.string().allow("", null),
     category: Joi.string()
       .valid(
-        "Food",
-        "Art",
-        "Electronics",
-        "Games",
-        "Home Decor",
-        "Jewellery",
-        "KitchenWare",
-        "Others",
-      )
+    "Art",
+    "Food",
+    "Pottery",
+    "Handicrafts",
+    "Jewellery",
+    "Home Decor",
+    "Kitchenware",
+    "Gifts",
+    "Others"
+  )
       .required(),
   }).required(),
 });
