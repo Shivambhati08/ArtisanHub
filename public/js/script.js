@@ -17,16 +17,16 @@
 })();
 
 
-// ================= Navbar Auto Close =================
 document.addEventListener("DOMContentLoaded", function () {
-    const navbarCollapse = document.querySelector(".navbar-collapse");
+    const navbarCollapse = document.getElementById("navbarNavAltMarkup");
     const navbarToggler = document.querySelector(".navbar-toggler");
 
     if (!navbarCollapse || !navbarToggler) return;
 
-    const bsCollapse = bootstrap.Collapse.getOrCreateInstance(navbarCollapse);
+    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+    });
 
-    // Close when clicking outside
     document.addEventListener("click", function (e) {
         if (
             navbarCollapse.classList.contains("show") &&
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Close when a nav link is clicked
     document.querySelectorAll(".navbar-nav .nav-link").forEach(link => {
         link.addEventListener("click", () => {
             bsCollapse.hide();
