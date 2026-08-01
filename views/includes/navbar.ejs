@@ -1,3 +1,5 @@
+
+
 <style>
   .search-btn{
     background-color: #fe424d;
@@ -113,11 +115,11 @@
 </a>
 
 
-        <% if(!locals.currUser){ %>
+        <% if(!currUser){ %>
         <a class="nav-link" href="/signup"><b>Sign up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
-       <% if(locals.currUser){ %>
+       <% if(currUser){ %>
 
 <div class="dropdown">
 
@@ -128,10 +130,10 @@ role="button"
 data-bs-toggle="dropdown">
 
 <img
-src="<%= locals.currUser.profileImage.url %>"
+src="<%= currUser.profileImage.url %>"
 class="profile-nav-img me-2">
 
-<span><%= locals.currUser.username %></span>
+<span><%= currUser.username %></span>
 
 </a>
 

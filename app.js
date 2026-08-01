@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV != "production"){
   require("dotenv").config();
 }
-console.log(require("connect-mongo"));
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -27,7 +26,6 @@ const userRouter = require("./routes/user.js");
 
 
 const dbUrl = process.env.ATLASDB_URL;
-console.log(process.env.ATLASDB_URL);
 main()
   .then(() => {
     console.log("connection successful");
@@ -90,7 +88,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.get("/", (req, res) => {
-  console.log("Root route hit");
   res.redirect("/services");
 });
 
@@ -100,6 +97,15 @@ app.use((req, res, next)=>{
   res.locals.currUser = req.user;
   next();
 });
+
+app.get("/checkuser", (req, res) => {
+    res.send({
+        isAuthenticated: req.isAuthenticated(),
+        user: req.user,
+        session: req.session
+    });
+});
+
 app.get("/demouser", async(req, res)=>{
   let fakeuser = new User({
     email: "student@gmail.com",
@@ -127,7 +133,6 @@ app.all("*splat", (req, res, next) => {
 //   res.status(statusCode).render("error.ejs", { message });
 // });
 app.use((err, req, res, next) => {
-  console.log("========== ERROR ==========");
   console.error(err);
   console.log("Status:", err.statusCode);
   console.log("Message:", err.message);

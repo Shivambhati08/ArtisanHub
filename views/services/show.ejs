@@ -1,9 +1,33 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  .show-img{
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    margin: auto;
+}
+#map{
+    width:100%;
+    height:450px;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+@media (max-width:768px){
+    #map{
+        height:300px;
+    }
+}
+</style>
 <div class="row mt-3">
-  <div class="col-md-8 offset-3">
-    <h3><%= service.title %></h3>
+  <div class="col-12 col-md-8 mx-auto">
+    <h3 class="mb-3 text-center text-md-start"><%= service.title %></h3>
   </div>
-  <div class="col-6 offset-3 service-card">
+  <div class="col-12 col-md-8 col-lg-6 mx-auto service-card">
     <div class="card border-0">
       <img
         src="<%= service.image.url %>"
@@ -36,20 +60,28 @@ class="text-decoration-none fw-bold">
     </div>
   </div>
 
- <%  if(currUser && currUser._id.equals(service.owner._id)){  %>
-  <div class="btns">
-    <a
-      href="/services/<%= service._id %>/edit"
-      class="btn btn-dark col-1 offset-3 edit-btn mb-3"
-      >Edit</a
-    >
+ <% if(currUser && currUser._id.equals(service.owner._id)){ %>
 
-    <form action="/services/<%= service._id %>?_method=DELETE" method="post">
-      <button class="btn btn-dark offset-5 mb-3">Delete</button>
-    </form>
-  </div>
-  <% } %>
-  <div class="col-8 offset-3 mb-3">
+<div class="col-12 col-md-8 mx-auto mb-4">
+    <div class="d-flex gap-2">
+
+        <a href="/services/<%= service._id %>/edit"
+           class="btn btn-dark">
+            Edit
+        </a>
+
+        <form action="/services/<%= service._id %>?_method=DELETE"
+              method="POST">
+
+            <button class="btn btn-danger">
+                Delete
+            </button>
+
+        </form>
+    </div>
+</div>
+<% } %>
+  <div class="col-12 col-md-8 mx-auto mb-3">
     <hr />
     <% if(currUser) { %>
     <h4>Leave a Review</h4>
@@ -102,7 +134,7 @@ class="text-decoration-none fw-bold">
     <div class="row">
       <p><b>All Reviews</b></p>
     <% for(review of service.reviews){ %>
-    <div class="card col-5 mb-3 ms-3">
+    <div class="card col-12 col-md-5 mb-3 me-md-3">
       <div class="card-body">
         <h5 class="card-title">
         @<%= review.author ? review.author.username : "Anonymous" %>
@@ -120,7 +152,7 @@ class="text-decoration-none fw-bold">
   </div>
   <% } %>
   </div>
-  <div class="col-8 offset-3 mb-3">
+  <div class="col-12 col-md-8 mx-auto mb-4">
     <h3>Where you'll be</h3>
     <div id="map"></div>
   </div>

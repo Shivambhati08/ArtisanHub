@@ -3,8 +3,6 @@ const User = require("../models/user");
 
 module.exports = function(passport){
 
-    console.log("BASE_URL =", process.env.BASE_URL);
-console.log("Callback URL =", `${process.env.BASE_URL}/auth/google/callback`);
 passport.use(
 
 new GoogleStrategy(

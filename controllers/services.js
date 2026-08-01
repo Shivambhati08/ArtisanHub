@@ -2,7 +2,7 @@ const Service = require("../models/service");
 
 module.exports.index =  async (req, res) => {
   const allServices = await Service.find({});
-  res.render("services/index.ejs", { allServices });
+  res.render("services/index.ejs", { allServices,currUser: res.locals.currUser });
 }
 
 module.exports.searchServices = async (req, res) => {
